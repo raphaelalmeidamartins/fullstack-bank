@@ -1,0 +1,11 @@
+{
+  "name": "fullstack-todo-list",
+  "version": "1.0.0",
+  "description": "Full stack todo list app with Next.js and Express.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raphael Martins",
+  "license": "ISC"
+}
