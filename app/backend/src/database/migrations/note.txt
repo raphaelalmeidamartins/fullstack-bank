@@ -1,1 +1,0 @@
-Put the migrations in this folder
