@@ -1,10 +1,13 @@
 import db from '../database/models';
 import Account from '../database/models/Account';
-import User from '../database/models/User';
+import Token from './strategies/token/Token';
+import UserValidator from './strategies/validators/UserValidator';
 
 class UserService {
   private _userRepository = User;
   private _accountRepository = Account;
+  private _validator = UserValidator;
+  private _tokenModule = Token;
 
   async register(username: string, password: string): Promise<void> {
     const transaction = await db.transaction();
