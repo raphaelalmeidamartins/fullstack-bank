@@ -1,11 +1,12 @@
-import UnauthorizedError from '../utils/errors/UnauthorizedError';
-import UnprocessableEntityError from '../utils/errors/UnprocessableEntityError ';
+import * as bcrypt from 'bcryptjs';
 import db from '../database/models';
 import Account from '../database/models/Account';
 import User, { IUserLogin, IUserRegister } from '../database/models/User';
+import NotFoundError from '../utils/errors/NotFoundError';
+import UnauthorizedError from '../utils/errors/UnauthorizedError';
+import UnprocessableEntityError from '../utils/errors/UnprocessableEntityError ';
 import Token from './strategies/token/Token';
 import UserValidator from './strategies/validators/UserValidator';
-import * as bcrypt from 'bcryptjs';
 
 const UNAVAILABLE_USERNAME_MESSAGE =
   'O nome de usuário escolhido está indisponível, escolha outro';
