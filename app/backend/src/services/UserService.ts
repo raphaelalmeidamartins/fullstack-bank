@@ -1,12 +1,14 @@
-import UnauthorizedError from 'src/utils/errors/UnauthorizedError';
-import UnprocessableEntityError from 'src/utils/errors/UnprocessableEntityError ';
+import UnauthorizedError from '../utils/errors/UnauthorizedError';
+import UnprocessableEntityError from '../utils/errors/UnprocessableEntityError ';
 import db from '../database/models';
 import Account from '../database/models/Account';
 import User, { IUserLogin, IUserRegister } from '../database/models/User';
 import Token from './strategies/token/Token';
 import UserValidator from './strategies/validators/UserValidator';
+import * as bcrypt from 'bcryptjs';
 
-const UNAVAILABLE_USERNAME_MESSAGE = 'Nome de usuário indisponível, escolha outro';
+const UNAVAILABLE_USERNAME_MESSAGE =
+  'Nome de usuário indisponível, escolha outro';
 const UNAUTHORIZED_MESSAGE = 'Nome de usuário ou senha estão incorretos';
 
 class UserService {
@@ -23,9 +25,7 @@ class UserService {
     });
 
     if (isUsernameNotAvailable) {
-      throw new UnprocessableEntityError(
-        UNAVAILABLE_USERNAME_MESSAGE
-      );
+      throw new UnprocessableEntityError(UNAVAILABLE_USERNAME_MESSAGE);
     }
 
     const transaction = await db.transaction();
@@ -38,8 +38,11 @@ class UserService {
         },
         { transaction }
       );
+
+      const hashPassword = await bcrypt.hash(body.password, 10);
+
       await this._userRepository.create(
-        { ...body, accountId },
+        { ...body, password: hashPassword, accountId },
         { transaction }
       );
       transaction.commit();
@@ -60,8 +63,9 @@ class UserService {
 
     if (!user) throw new UnauthorizedError(UNAUTHORIZED_MESSAGE);
 
-    if (user.password !== body.password)
-      throw new UnauthorizedError(UNAUTHORIZED_MESSAGE);
+    const isPasswordValid = await bcrypt.compare(body.password, user.password);
+
+    if (!isPasswordValid) throw new UnauthorizedError(UNAUTHORIZED_MESSAGE);
 
     const tokenPayload = { id: user.id, username: user.username };
     const token = await this._tokenModule.generate(tokenPayload);
