@@ -10,6 +10,7 @@ interface IUser {
 
 type IUserCreation = Omit<IUser, 'id'>;
 
+type IUserLogin = Omit<IUser, 'id' | 'accountId'>;
 type IUserReturned = Omit<IUser, 'password'>;
 
 class User extends Sequelize.Model<IUser, IUserCreation> {
