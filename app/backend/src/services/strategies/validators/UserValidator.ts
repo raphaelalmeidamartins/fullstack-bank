@@ -3,11 +3,11 @@ import { IUserLogin, IUserRegister } from '../../../database/models/User';
 import generateValidatorFunction from './helpers/generateValidatorFunction';
 import IValidatorFunction from './types/IValidatorFunction';
 
-const REQUIRED_MSG = 'Todos os campos precisam ser preenchidos';
+const REQUIRED_MSG = 'Todos os campos precisam ser preenchidos.';
 const USERNAME_LENGTH_MSG =
-  'O nome de usuário precisa ter no mínimo 3 caracteres';
+  'O nome de usuário precisa ter no mínimo 3 caracteres.';
 const PASSWORD_PATTERN_MSG =
-  'A senha precisa ter pelo menos 8 caracteres, um número e uma letra maiúscula';
+  'A senha precisa ter pelo menos 8 caracteres, um número e uma letra maiúscula.';
 
 class UserValidator {
   static login = generateValidatorFunction(
@@ -40,7 +40,7 @@ class UserValidator {
           'any.required': REQUIRED_MSG,
           'string.empty': REQUIRED_MSG,
           'string.base': REQUIRED_MSG,
-          'string.regex': PASSWORD_PATTERN_MSG,
+          'string.pattern.base': PASSWORD_PATTERN_MSG,
         }),
     })
   ) as IValidatorFunction<IUserRegister>;

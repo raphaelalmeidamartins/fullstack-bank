@@ -8,8 +8,8 @@ import UserValidator from './strategies/validators/UserValidator';
 import * as bcrypt from 'bcryptjs';
 
 const UNAVAILABLE_USERNAME_MESSAGE =
-  'Nome de usuário indisponível, escolha outro';
-const UNAUTHORIZED_MESSAGE = 'Nome de usuário ou senha estão incorretos';
+  'O nome de usuário escolhido está indisponível, escolha outro';
+const UNAUTHORIZED_MESSAGE = 'O nome de usuário ou a senha estão incorretos';
 
 class UserService {
   private _userRepository = User;
