@@ -1,9 +1,13 @@
+import UnauthorizedError from 'src/utils/errors/UnauthorizedError';
+import UnprocessableEntityError from 'src/utils/errors/UnprocessableEntityError ';
 import db from '../database/models';
 import Account from '../database/models/Account';
+import User, { IUserLogin, IUserRegister } from '../database/models/User';
 import Token from './strategies/token/Token';
 import UserValidator from './strategies/validators/UserValidator';
 
 const UNAVAILABLE_USERNAME_MESSAGE = 'Nome de usuário indisponível, escolha outro';
+const UNAUTHORIZED_MESSAGE = 'Nome de usuário ou senha estão incorretos';
 
 class UserService {
   private _userRepository = User;
