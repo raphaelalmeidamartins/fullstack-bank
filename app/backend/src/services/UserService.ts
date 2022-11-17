@@ -73,6 +73,17 @@ class UserService {
 
     return { ...tokenPayload, token };
   }
+
+  async getBalance(authorization: string | undefined): Promise<number> {
+    const { id } = await this._tokenModule.validate(authorization);
+    const user = await this._userRepository.findByPk(id);
+
+    if (!user) throw new NotFoundError('Usuário não encontrado.');
+    const account = await this._accountRepository.findByPk(user.accountId);
+    if (!account) throw new NotFoundError('Conta não encontrado.');
+
+    return account.balance;
+  }
 }
 
 export default UserService;
