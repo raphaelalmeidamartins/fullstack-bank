@@ -6,25 +6,18 @@ class Token {
   constructor(private tokenModule = jwt) {}
 
   static async generate(payload: ITokenPayload): Promise<string> {
-    const token = jwt.sign(
-      payload,
-      String(process.env.JWT_SECRET),
-      {
-        expiresIn: '1d',
-      },
-    );
+    const token = jwt.sign(payload, String(process.env.JWT_SECRET), {
+      expiresIn: '24h',
+    });
     return token;
   }
 
   static async validate(
-    authorization: string | undefined,
+    authorization: string | undefined
   ): Promise<ITokenPayload> {
     if (!authorization) throw new UnauthorizedError('Token não encontrado');
     const token = authorization;
-    const payload = jwt.verify(
-      token,
-      String(process.env.JWT_SECRET),
-    );
+    const payload = jwt.verify(token, String(process.env.JWT_SECRET));
     return payload as ITokenPayload;
   }
 }
