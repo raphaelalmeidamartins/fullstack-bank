@@ -44,6 +44,26 @@ class UserService {
       throw error;
     }
   }
+
+  async login(
+    body: IUserLogin
+  ): Promise<{ id: number; username: string; token: string }> {
+    this._validator.login(body);
+
+    const user = await this._userRepository.findOne({
+      where: { username: body.username },
+    });
+
+    if (!user) throw new UnauthorizedError(UNAUTHORIZED_MESSAGE);
+
+    if (user.password !== body.password)
+      throw new UnauthorizedError(UNAUTHORIZED_MESSAGE);
+
+    const tokenPayload = { id: user.id, username: user.username };
+    const token = await this._tokenModule.generate(tokenPayload);
+
+    return { ...tokenPayload, token };
+  }
 }
 
 export default UserService;
