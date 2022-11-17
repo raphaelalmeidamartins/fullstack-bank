@@ -1,4 +1,5 @@
 import express from 'express';
+import errorMiddleware from './utils/middleware/errorMiddleware';
 
 class App {
   public app: express.Express;
@@ -25,6 +26,8 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+
+    this.app.use(errorMiddleware);
   }
 
   public start(PORT: string | number): void {
