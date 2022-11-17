@@ -11,6 +11,8 @@ interface IUser {
 type IUserCreation = Omit<IUser, 'id'>;
 
 type IUserLogin = Omit<IUser, 'id' | 'accountId'>;
+type IUserRegister = Omit<IUser, 'id' | 'accountId'>;
+
 type IUserReturned = Omit<IUser, 'password'>;
 
 class User extends Sequelize.Model<IUser, IUserCreation> {
@@ -41,4 +43,4 @@ User.init(
 );
 
 export default User;
-export { IUser, IUserCreation, IUserReturned };
+export { IUser, IUserCreation, IUserLogin, IUserRegister, IUserReturned };
