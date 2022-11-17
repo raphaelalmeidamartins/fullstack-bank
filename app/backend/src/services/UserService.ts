@@ -3,13 +3,27 @@ import Account from '../database/models/Account';
 import Token from './strategies/token/Token';
 import UserValidator from './strategies/validators/UserValidator';
 
+const UNAVAILABLE_USERNAME_MESSAGE = 'Nome de usuário indisponível, escolha outro';
+
 class UserService {
   private _userRepository = User;
   private _accountRepository = Account;
   private _validator = UserValidator;
   private _tokenModule = Token;
 
-  async register(username: string, password: string): Promise<void> {
+  async register(body: IUserRegister): Promise<void> {
+    this._validator.register(body);
+
+    const isUsernameNotAvailable = await this._userRepository.findOne({
+      where: { username: body.username },
+    });
+
+    if (isUsernameNotAvailable) {
+      throw new UnprocessableEntityError(
+        UNAVAILABLE_USERNAME_MESSAGE
+      );
+    }
+
     const transaction = await db.transaction();
 
     try {
@@ -21,7 +35,7 @@ class UserService {
         { transaction }
       );
       await this._userRepository.create(
-        { username, password, accountId },
+        { ...body, accountId },
         { transaction }
       );
       transaction.commit();
