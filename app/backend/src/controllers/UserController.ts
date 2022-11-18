@@ -20,9 +20,9 @@ class UserController {
   }
 
   async register(req: Request, res: Response): Promise<void> {
-    const user = await this._service.register(req.body);
+    await this._service.register(req.body);
 
-    res.status(StatusCodes.CREATED).json(user);
+    res.status(StatusCodes.CREATED).json({ message: 'Usuário registrado com sucesso.' });
   }
 
   async getBalance(req: Request, res: Response): Promise<void> {
