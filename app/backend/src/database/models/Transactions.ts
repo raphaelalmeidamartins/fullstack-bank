@@ -11,6 +11,11 @@ interface ITransaction {
 
 type ITransactionCreation = Omit<ITransaction, 'id' | 'createdAt'>;
 
+interface ITransactionRegister {
+  username: string;
+  value: number;
+}
+
 type ITransactionReturned = ITransaction;
 
 class Transaction extends Sequelize.Model<ITransaction, ITransactionCreation> {
@@ -44,4 +49,9 @@ Transaction.init(
 );
 
 export default Transaction;
-export { ITransaction, ITransactionCreation, ITransactionReturned };
+export {
+  ITransaction,
+  ITransactionCreation,
+  ITransactionRegister,
+  ITransactionReturned,
+};
