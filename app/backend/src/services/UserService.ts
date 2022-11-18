@@ -13,7 +13,7 @@ const UNAVAILABLE_USERNAME_MESSAGE =
 const UNAUTHORIZED_MESSAGE = 'O nome de usuário ou a senha estão incorretos';
 
 class UserService {
-  private _userRepository = User;
+  private _repository = User;
   private _accountRepository = Account;
   private _validator = UserValidator;
   private _tokenModule = Token;
@@ -21,7 +21,7 @@ class UserService {
   async register(body: IUserRegister): Promise<void> {
     this._validator.register(body);
 
-    const isUsernameNotAvailable = await this._userRepository.findOne({
+    const isUsernameNotAvailable = await User.findOne({
       where: { username: body.username },
     });
 
@@ -42,7 +42,7 @@ class UserService {
 
       const hashPassword = await bcrypt.hash(body.password, 10);
 
-      await this._userRepository.create(
+      await this._repository.create(
         { ...body, password: hashPassword, accountId },
         { transaction }
       );
@@ -58,7 +58,7 @@ class UserService {
   ): Promise<{ id: number; username: string; token: string }> {
     this._validator.login(body);
 
-    const user = await this._userRepository.findOne({
+    const user = await this._repository.findOne({
       where: { username: body.username },
     });
 
@@ -77,7 +77,7 @@ class UserService {
   async getBalance(authorization: string | undefined): Promise<number> {
     const { id } = await this._tokenModule.validate(authorization);
 
-    const user = await this._userRepository.findByPk(id);
+    const user = await this._repository.findByPk(id);
     const account = await this._accountRepository.findByPk(user?.accountId);
 
     if (!user || !account)
