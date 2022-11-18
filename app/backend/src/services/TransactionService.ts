@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import db from '../database/models';
 import Account from '../database/models/Account';
 import Transaction, {
@@ -83,27 +84,38 @@ class TransactionService {
 
   async list(
     authorization: string | undefined,
-    type: string | undefined
+    type: string | undefined,
+    from: string | undefined,
+    to: string | undefined,
   ): Promise<ITransaction[]> {
     const { id } = await this._tokenModule.validate(authorization);
 
     let transactions: ITransaction[];
 
+    let dateQuery = {};
+
+    if (from) {
+      const startDate = new Date(from);
+      const endDate = to ? new Date(to) : new Date();
+
+      dateQuery = { createdAt: { [Op.between]: [startDate, endDate ]} }
+    }
+
     switch (type) {
       case 'cashout':
         transactions = await this._repository.findAll({
-          where: { debitedAccountId: id },
+          where: { debitedAccountId: id, ...dateQuery },
         });
         break;
 
       case 'cashin':
         transactions = await this._repository.findAll({
-          where: { creditedAccountId: id },
+          where: { creditedAccountId: id, ...dateQuery },
         });
         break;
 
       default:
-        transactions = await this._repository.findAll();
+        transactions = await this._repository.findAll({ where: { ...dateQuery } });
         break;
     }
 

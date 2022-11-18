@@ -21,11 +21,13 @@ class TransactionController {
   }
 
   async list(req: Request, res: Response): Promise<void> {
-    const { type } = req.query;
+    const { type, from, to } = req.query;
 
     const transactions = await this._service.list(
       req.headers.authorization,
-      type as string | undefined
+      type as string | undefined,
+      from as string | undefined,
+      to as string | undefined
     );
 
     res.status(StatusCodes.OK).json(transactions);
