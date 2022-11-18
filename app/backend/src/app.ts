@@ -1,5 +1,6 @@
 import express from 'express';
 import loginRouter from './routes/login';
+import transactionsRouter from './routes/transactions';
 import usersRouter from './routes/users';
 import errorMiddleware from './utils/middleware/errorMiddleware';
 
@@ -31,6 +32,7 @@ class App {
 
     this.app.use('/login', loginRouter);
     this.app.use('/users', usersRouter);
+    this.app.use('/transactions', transactionsRouter);
 
     this.app.use(errorMiddleware);
   }
