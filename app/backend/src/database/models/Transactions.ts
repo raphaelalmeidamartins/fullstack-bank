@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize';
 import db from '.';
+import Account from './Account';
 
 interface ITransaction {
   id: number;
@@ -47,6 +48,26 @@ Transaction.init(
     underscored: false,
   }
 );
+
+Transaction.belongsTo(Account, {
+  foreignKey: 'debitedAccountId',
+  as: 'debitedAccount',
+});
+
+Transaction.belongsTo(Account, {
+  foreignKey: 'creditedAccountId',
+  as: 'creditedAccount',
+});
+
+Account.hasMany(Transaction, {
+  sourceKey: 'id',
+  foreignKey: 'debitedAccountId',
+});
+
+Account.hasMany(Transaction, {
+  sourceKey: 'id',
+  foreignKey: 'creditedAccountId',
+});
 
 export default Transaction;
 export {
