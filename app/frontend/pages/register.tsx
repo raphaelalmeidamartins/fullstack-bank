@@ -1,19 +1,21 @@
 import { StatusCodes } from 'http-status-codes';
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { FaLock, FaUserAlt } from 'react-icons/fa';
 import Footer from '../components/Footer';
+import Modal from '../components/Modal';
 import service from '../service';
 import styles from '../styles/pages/Register.module.css';
 
 export default function Register() {
+  const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [focused, setFocused] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [modalClass, setModalClass] = useState(styles['modal--hidden']);
+  const [displayModal, setDisplayModal] = useState(false);
 
   const handleFocus = (name: string) => {
     setFocused(name);
@@ -61,7 +63,7 @@ export default function Register() {
         setPassword('');
         setFocused('');
         setErrorMessage('');
-        setModalClass(styles['modal--display']);
+        setDisplayModal(true);
         break;
 
       default:
@@ -128,15 +130,12 @@ export default function Register() {
           </button>
         </form>
 
-        <div>
-          <div className={`${styles.modal__overlay} ${modalClass}`} />
-          <div className={`${styles.modal} ${modalClass}`}>
-            <p>Usuário criado com sucesso!</p>
-            <Link className={styles.form__button} href="/">
-              ENTRAR
-            </Link>
-          </div>
-        </div>
+        <Modal
+          display={displayModal}
+          message="Usuário criado com sucesso!"
+          buttonMessage="ENTRAR"
+          handleClick={() => router.push('/')}
+        />
       </main>
 
       <Footer />
