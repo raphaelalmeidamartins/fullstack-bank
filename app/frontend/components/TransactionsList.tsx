@@ -12,9 +12,11 @@ import ITransaction from '../types/ITransaction';
 export default function TransactionsList({
   token,
   username,
+  balance,
 }: {
   token: string;
   username: string;
+  balance: string;
 }) {
   const [type, setType] = useState('');
   const [from, setFrom] = useState('');
@@ -49,7 +51,7 @@ export default function TransactionsList({
 
   useEffect(() => {
     handleUpdateList();
-  }, [token]);
+  }, [token, balance]);
 
   const handleChange = ({
     target,
