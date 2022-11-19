@@ -17,6 +17,15 @@ const service = {
 
       return response;
     },
+    async users(username: string, password: string) {
+      const response = await fetch(`${API_URL}/users`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ username, password }),
+      });
+
+      return response;
+    },
   },
 };
 
