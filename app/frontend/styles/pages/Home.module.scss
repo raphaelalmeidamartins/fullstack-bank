@@ -1,10 +1,11 @@
 @import "../abstracts/_colors";
-@import "../abstracts/_gradients";
+@import "../abstracts/_backgrounds";
 @import "../abstracts/_radius";
 
 .page {
+  @include background;
+
   align-items: center;
-  background: $gradient-one;
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -12,6 +13,7 @@
 }
 
 .page__logo {
+  height: 200px;
   margin-bottom: 1rem;
   width: 200px;
 }
@@ -96,9 +98,14 @@
   padding: 0.7rem;
   text-align: center;
   text-decoration: none;
+  transition: filter 400ms ease-in-out;
 
   &:disabled {
     opacity: 0.5;
+  }
+
+  &:hover {
+    filter: brightness(200%);
   }
 }
 
