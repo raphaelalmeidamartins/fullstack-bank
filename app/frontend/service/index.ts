@@ -26,6 +26,15 @@ const service = {
 
       return response;
     },
+    async transactions(authorization: string, username: string, value: number) {
+      const response = await fetch(`${API_URL}/transactions`, {
+        method: 'POST',
+        headers: { ...headers, authorization },
+        body: JSON.stringify({ username, value }),
+      });
+
+      return response;
+    },
   },
   get: {
     async balance(authorization: string) {
