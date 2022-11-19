@@ -8,6 +8,7 @@ import { FaLock, FaUserAlt } from 'react-icons/fa';
 import Footer from '../components/Footer';
 import service from '../service';
 import styles from '../styles/pages/Home.module.css';
+import logo from '../assets/logo-ngcash-branco.88c5860.svg';
 
 export default function Home() {
   const [username, setUsername] = useState('');
@@ -79,7 +80,7 @@ export default function Home() {
       <main>
         <form className={styles.form} action="POST" onSubmit={handleSubmit}>
           <header>
-            <Image className={styles.page__logo} src="" alt="" />
+            <Image className={styles.page__logo} src={logo} alt="NG.CASH" />
             <p>Login</p>
           </header>
           <div className={styles['form__input-container']}>

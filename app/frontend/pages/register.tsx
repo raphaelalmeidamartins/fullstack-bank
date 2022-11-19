@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import Modal from '../components/Modal';
 import service from '../service';
 import styles from '../styles/pages/Register.module.css';
+import logo from '../assets/logo-ngcash-branco.88c5860.svg';
 
 export default function Register() {
   const router = useRouter();
@@ -83,7 +84,7 @@ export default function Register() {
       <main>
         <form className={styles.form} action="POST" onSubmit={handleSubmit}>
           <header>
-            <Image className={styles.page__logo} src="" alt="" />
+            <Image className={styles.page__logo} src={logo} alt="NG.CASH" />
             <p>Criar conta</p>
           </header>
           <div className={styles['form__input-container']}>
