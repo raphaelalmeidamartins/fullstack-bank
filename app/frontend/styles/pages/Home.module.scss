@@ -1,6 +1,10 @@
+@import "../abstracts/_colors";
+@import "../abstracts/_gradients";
+@import "../abstracts/_radius";
+
 .page {
   align-items: center;
-  background: linear-gradient(180deg, #1988ff 0%, #004c9e 100%);
+  background: $gradient-one;
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -17,21 +21,22 @@
 }
 
 .form {
-  background-color: #ffffff;
-  border: 1px solid rgba(1, 94, 144, 0.2039215686);
-  border-radius: 1rem;
-  box-shadow: 0 5px 8px rgba(1, 94, 144, 0.2039215686);
+  background-color: $primary-color;
+  border: 1px solid $divider-color;
+  border-radius: $secondary-radius;
+  box-shadow: 0 5px 8px $divider-color;
   display: flex;
   flex-flow: column nowrap;
   max-width: 372px;
   padding: 2rem;
   transition: 200ms;
-}
-.form header {
-  color: black;
-  font-size: 1.5rem;
-  margin: 1rem;
-  text-align: center;
+
+  header {
+    color: $text-icons;
+    font-size: 1.5rem;
+    margin: 1rem;
+    text-align: center;
+  }
 }
 
 .form__input-container {
@@ -39,25 +44,27 @@
   margin-bottom: 1rem;
   position: relative;
   width: 100%;
-}
-.form__input-container input {
-  background-color: rgba(2, 137, 209, 0.0549019608);
-  border: 1px solid rgba(1, 94, 144, 0.2039215686);
-  border-radius: 0.5rem;
-  box-shadow: 0 3px 3px rgba(1, 94, 144, 0.2039215686);
-  color: black;
-  flex-grow: 2;
-  font-size: 1rem;
-  padding: 0.7rem 0.7rem 0.7rem 2.5rem;
-  width: 100%;
-}
-.form__input-container input:focus {
-  opacity: 1;
+
+  input {
+    background-color: $input-background;
+    border: 1px solid $divider-color;
+    border-radius: $primary-radius;
+    box-shadow: 0 3px 3px $divider-color;
+    color: $text-icons;
+    flex-grow: 2;
+    font-size: 1rem;
+    padding: 0.7rem 0.7rem 0.7rem 2.5rem;
+    width: 100%;
+
+    &:focus {
+      opacity: 1;
+    }
+  }
 }
 
 .form__icon {
   align-items: center;
-  color: black;
+  color: $text-icons;
   display: flex;
   justify-content: center;
   left: 0.8rem;
@@ -75,13 +82,13 @@
 }
 
 .form__error-message {
-  color: rgb(159, 88, 0);
+  color: $warning-color;
   text-align: center;
 }
 
 .form__button {
-  background-color: #004c9e;
-  border-radius: 0.5rem;
+  background-color: $dark-secondary-color;
+  border-radius: $primary-radius;
   color: white;
   cursor: pointer;
   font-size: 1rem;
@@ -89,57 +96,67 @@
   padding: 0.7rem;
   text-align: center;
   text-decoration: none;
-}
-.form__button:disabled {
-  opacity: 0.5;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 .footer {
   bottom: 0;
-  color: #ffffff;
+  color: $primary-color;
   opacity: 0.5;
   padding: 2rem;
   position: fixed;
   text-align: center;
-}
-.footer a {
-  color: #ffffff;
-  cursor: pointer;
-}
-.footer a:hover {
-  color: #ffffff;
-  text-decoration: underline;
+
+  a {
+    color: $primary-color;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary-color;
+      text-decoration: underline;
+    }
+  }
 }
 
 @media screen and (max-width: 500px) {
   .page {
-    background: #ffffff;
+    background: $primary-color;
   }
+
   .form {
     background-color: transparent;
     border: 0;
     box-shadow: none;
   }
+
   .footer {
-    color: black;
-  }
-  .footer a {
-    color: black;
-  }
-  .footer a:hover {
-    color: black;
+    color: $text-icons;
+
+    a {
+      color: $text-icons;
+
+      &:hover {
+        color: $text-icons;
+      }
+    }
   }
 }
+
 @media screen and (max-height: 550px) {
   .page {
     flex-flow: column nowrap;
   }
+
   .footer {
     position: relative;
   }
 }
+
 @media screen and (max-width: 340px) {
   .form {
     width: 95%;
   }
-}/*# sourceMappingURL=Home.module.css.map */
+}
