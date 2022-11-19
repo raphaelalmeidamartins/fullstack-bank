@@ -1,5 +1,5 @@
 @import "../abstracts/_colors";
-@import "../abstracts/_gradients";
+@import "../abstracts/_backgrounds";
 @import "../abstracts/_radius";
 
 .modal__overlay {
@@ -47,8 +47,13 @@
   padding: 0.7rem;
   text-align: center;
   text-decoration: none;
+  transition: filter 400ms ease-in-out;
 
   &:disabled {
     opacity: 0.5;
+  }
+
+  &:hover {
+    filter: brightness(200%);
   }
 }

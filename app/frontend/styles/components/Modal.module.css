@@ -1,5 +1,5 @@
 .modal__overlay {
-  background-color: #004c9e;
+  background-color: #27292b;
   height: 100vh;
   left: 0;
   opacity: 0.8;
@@ -10,9 +10,9 @@
 
 .modal {
   background-color: #ffffff;
-  border: 1px solid rgba(1, 94, 144, 0.2039215686);
-  border-radius: 1rem;
-  box-shadow: 0 10px 16px rgba(1, 94, 144, 0.2039215686);
+  border: 1px solid rgba(119, 129, 135, 0.3960784314);
+  border-radius: 1.8rem;
+  box-shadow: 0 10px 16px rgba(119, 129, 135, 0.3960784314);
   color: black;
   flex-flow: column nowrap;
   left: 50%;
@@ -34,8 +34,8 @@
 }
 
 .modal__button {
-  background-color: #004c9e;
-  border-radius: 0.5rem;
+  background-color: #27292b;
+  border-radius: 1.2rem;
   color: white;
   cursor: pointer;
   font-size: 1rem;
@@ -43,7 +43,11 @@
   padding: 0.7rem;
   text-align: center;
   text-decoration: none;
+  transition: filter 400ms ease-in-out;
 }
 .modal__button:disabled {
   opacity: 0.5;
+}
+.modal__button:hover {
+  filter: brightness(200%);
 }/*# sourceMappingURL=Modal.module.css.map */
