@@ -1,0 +1,33 @@
+.footer {
+  bottom: 0;
+  color: #ffffff;
+  opacity: 0.5;
+  padding: 2rem;
+  position: fixed;
+  text-align: center;
+}
+.footer a {
+  color: #ffffff;
+  cursor: pointer;
+}
+.footer a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 500px) {
+  .footer {
+    color: black;
+  }
+  .footer a {
+    color: black;
+  }
+  .footer a:hover {
+    color: black;
+  }
+}
+@media screen and (max-height: 550px) {
+  .footer {
+    position: relative;
+  }
+}/*# sourceMappingURL=Footer.module.css.map */

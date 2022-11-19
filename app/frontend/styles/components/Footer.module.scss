@@ -1,0 +1,42 @@
+@import "../abstracts/_colors";
+@import "../abstracts/_gradients";
+@import "../abstracts/_radius";
+
+.footer {
+  bottom: 0;
+  color: $primary-color;
+  opacity: 0.5;
+  padding: 2rem;
+  position: fixed;
+  text-align: center;
+
+  a {
+    color: $primary-color;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary-color;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .footer {
+    color: $text-icons;
+
+    a {
+      color: $text-icons;
+
+      &:hover {
+        color: $text-icons;
+      }
+    }
+  }
+}
+
+@media screen and (max-height: 550px) {
+  .footer {
+    position: relative;
+  }
+}

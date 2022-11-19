@@ -102,25 +102,6 @@
   }
 }
 
-.footer {
-  bottom: 0;
-  color: $primary-color;
-  opacity: 0.5;
-  padding: 2rem;
-  position: fixed;
-  text-align: center;
-
-  a {
-    color: $primary-color;
-    cursor: pointer;
-
-    &:hover {
-      color: $primary-color;
-      text-decoration: underline;
-    }
-  }
-}
-
 @media screen and (max-width: 500px) {
   .page {
     background: $primary-color;
@@ -131,27 +112,11 @@
     border: 0;
     box-shadow: none;
   }
-
-  .footer {
-    color: $text-icons;
-
-    a {
-      color: $text-icons;
-
-      &:hover {
-        color: $text-icons;
-      }
-    }
-  }
 }
 
 @media screen and (max-height: 550px) {
   .page {
     flex-flow: column nowrap;
-  }
-
-  .footer {
-    position: relative;
   }
 }
 
