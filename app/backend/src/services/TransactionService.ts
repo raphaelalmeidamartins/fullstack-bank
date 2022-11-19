@@ -108,19 +108,18 @@ class TransactionService {
     const { id } = await this._tokenModule.validate(authorization);
 
     let transactions: ITransaction[];
-
     let dateQuery = {};
 
     if (from) {
       const startDate = new Date(from);
       const endDate = to ? new Date(to) : new Date();
-
       dateQuery = { createdAt: { [Op.between]: [startDate, endDate] } };
     }
 
     switch (type) {
       case 'cashout':
         transactions = await this._repository.findAll({
+          order: [['createdAt', 'DESC']],
           where: { debitedAccountId: id, ...dateQuery },
           ...INCLUDE_OPTIONS,
         });
@@ -128,6 +127,7 @@ class TransactionService {
 
       case 'cashin':
         transactions = await this._repository.findAll({
+          order: [['createdAt', 'DESC']],
           where: { creditedAccountId: id, ...dateQuery },
           ...INCLUDE_OPTIONS,
         });
@@ -135,7 +135,11 @@ class TransactionService {
 
       default:
         transactions = await this._repository.findAll({
-          where: { ...dateQuery },
+          order: [['createdAt', 'DESC']],
+          where: {
+            [Op.or]: [{ debitedAccountId: id }, { creditedAccountId: id }],
+            ...dateQuery,
+          },
           ...INCLUDE_OPTIONS,
         });
         break;
