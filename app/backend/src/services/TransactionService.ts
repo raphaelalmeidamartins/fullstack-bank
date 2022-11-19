@@ -11,6 +11,23 @@ import UnprocessableEntityError from '../utils/errors/UnprocessableEntityError '
 import Token from './strategies/token/Token';
 import TransactionValidator from './strategies/validators/TransactionValidator';
 
+const INCLUDE_OPTIONS = {
+  attributes: { exclude: ['debitedAccountId', 'creditedAccountId'] },
+  include: [
+    {
+      model: Account,
+      as: 'debitedAccount',
+      attributes: ['id'],
+      include: [{ model: User, as: 'user', attributes: ['id', 'username'] }],
+    },
+    {
+      model: Account,
+      as: 'creditedAccount',
+      attributes: ['id'],
+      include: [{ model: User, as: 'user', attributes: ['id', 'username'] }],
+    },
+  ],
+};
 class TransactionService {
   private _repository = Transaction;
   private _userRepository = User;
@@ -86,7 +103,7 @@ class TransactionService {
     authorization: string | undefined,
     type: string | undefined,
     from: string | undefined,
-    to: string | undefined,
+    to: string | undefined
   ): Promise<ITransaction[]> {
     const { id } = await this._tokenModule.validate(authorization);
 
@@ -98,24 +115,29 @@ class TransactionService {
       const startDate = new Date(from);
       const endDate = to ? new Date(to) : new Date();
 
-      dateQuery = { createdAt: { [Op.between]: [startDate, endDate ]} }
+      dateQuery = { createdAt: { [Op.between]: [startDate, endDate] } };
     }
 
     switch (type) {
       case 'cashout':
         transactions = await this._repository.findAll({
           where: { debitedAccountId: id, ...dateQuery },
+          ...INCLUDE_OPTIONS,
         });
         break;
 
       case 'cashin':
         transactions = await this._repository.findAll({
           where: { creditedAccountId: id, ...dateQuery },
+          ...INCLUDE_OPTIONS,
         });
         break;
 
       default:
-        transactions = await this._repository.findAll({ where: { ...dateQuery } });
+        transactions = await this._repository.findAll({
+          where: { ...dateQuery },
+          ...INCLUDE_OPTIONS,
+        });
         break;
     }
 
