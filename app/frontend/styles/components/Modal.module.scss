@@ -1,0 +1,54 @@
+@import "../abstracts/_colors";
+@import "../abstracts/_gradients";
+@import "../abstracts/_radius";
+
+.modal__overlay {
+  background-color: $dark-secondary-color;
+  height: 100vh;
+  left: 0;
+  opacity: 0.8;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+}
+
+.modal {
+  background-color: $primary-color;
+  border: 1px solid $divider-color;
+  border-radius: $secondary-radius;
+  box-shadow: 0 10px 16px $divider-color;
+  color: $text-icons;
+  flex-flow: column nowrap;
+  left: 50%;
+  max-width: 250px;
+  padding: 2rem;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transition: 200ms;
+  transform: translate(-50%, -50%);
+}
+
+.modal--hidden {
+  display: none;
+}
+
+.modal--display {
+  display: flex;
+}
+
+.modal__button {
+  background-color: $dark-secondary-color;
+  border-radius: $primary-radius;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  padding: 0.7rem;
+  text-align: center;
+  text-decoration: none;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}

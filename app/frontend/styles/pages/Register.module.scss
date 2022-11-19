@@ -21,42 +21,6 @@
   display: none;
 }
 
-.modal__overlay {
-  background-color: $dark-secondary-color;
-  height: 100vh;
-  left: 0;
-  opacity: 0.8;
-  position: fixed;
-  width: 100vw;
-  top: 0;
-}
-
-.modal {
-  background-color: $primary-color;
-  border: 1px solid $divider-color;
-  border-radius: $secondary-radius;
-  box-shadow: 0 10px 16px $divider-color;
-  color: $text-icons;
-  display: flex;
-  flex-flow: column nowrap;
-  left: 50%;
-  max-width: 250px;
-  padding: 2rem;
-  position: absolute;
-  text-align: center;
-  top: 50%;
-  transition: 200ms;
-  transform: translate(-50%, -50%);
-}
-
-.modal--hidden {
-  display: none;
-}
-
-.modal--display {
-  display: flex;
-}
-
 .form {
   background-color: $primary-color;
   border: 1px solid $divider-color;
