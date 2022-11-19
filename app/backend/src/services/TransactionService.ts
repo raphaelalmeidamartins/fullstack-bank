@@ -56,7 +56,7 @@ class TransactionService {
 
     if (!debitedAccount || !creditedAccount)
       throw new NotFoundError(
-        'Dados de transação inválidos, a transação não foi realizada.'
+        'Dados de transação inválidos, verifique se o nome de usuário está correto.'
       );
 
     if (debitedAccount.balance < body.value) {
