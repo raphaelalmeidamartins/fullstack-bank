@@ -27,6 +27,32 @@ const service = {
       return response;
     },
   },
+  get: {
+    async balance(authorization: string) {
+      const response = await fetch(`${API_URL}/users/balance`, {
+        method: 'GET',
+        headers: { ...headers, authorization },
+      });
+
+      return response;
+    },
+    async transactions(
+      authorization: string,
+      type: string,
+      from: string,
+      to: string,
+    ) {
+      const response = await fetch(
+        `${API_URL}/transactions?from=${from}&to=${to}&type=${type}`,
+        {
+          method: 'GET',
+          headers: { ...headers, authorization },
+        },
+      );
+
+      return response;
+    },
+  },
 };
 
 export default service;
