@@ -1,10 +1,13 @@
 {
-  "name": "fullstack-todo-list",
+  "name": "fullstack-bank",
   "version": "1.0.0",
-  "description": "Full stack todo list app with Next.js and Express.js",
+  "description": "Full stack fine tech app with Next.js and Express.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compose:up": "cd app && docker-compose up -d",
+    "compose:up:build": "cd app && docker-compose up -d --build",
+    "compose:down": "cd app && docker-compose down --remove-orphans"
   },
   "author": "Raphael Martins",
   "license": "ISC"
