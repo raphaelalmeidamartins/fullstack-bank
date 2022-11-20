@@ -22,6 +22,9 @@ class UserValidator {
         'string.base': REQUIRED_MSG,
         'any.required': REQUIRED_MSG,
       }),
+    }).messages({
+      'object.unknown':
+        'O corpo da requisição contém campos que não são permitidos.',
     })
   ) as IValidatorFunction<IUserLogin>;
 
@@ -42,6 +45,9 @@ class UserValidator {
           'string.base': REQUIRED_MSG,
           'string.pattern.base': PASSWORD_PATTERN_MSG,
         }),
+    }).messages({
+      'object.unknown':
+        'O corpo da requisição contém campos que não são permitidos.',
     })
   ) as IValidatorFunction<IUserRegister>;
 }

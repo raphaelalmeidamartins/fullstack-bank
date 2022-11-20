@@ -20,6 +20,9 @@ class TransactionValidator {
         'number.base': VALUE_MSG,
         'number.positive': VALUE_MSG,
       }),
+    }).messages({
+      'object.unknown':
+        'O corpo da requisição contém campos que não são permitidos.',
     })
   ) as IValidatorFunction<ITransactionRegister>;
 }
