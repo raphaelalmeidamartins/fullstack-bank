@@ -1,5 +1,5 @@
 {
-  "name": "tfc-backend",
+  "name": "bank-backend",
   "version": "1.0.0",
   "description": "",
   "main": "./build/server",
