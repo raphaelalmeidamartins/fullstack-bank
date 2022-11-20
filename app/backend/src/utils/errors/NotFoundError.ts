@@ -2,7 +2,7 @@ import CustomGenericError from './CustomGenericError';
 
 class NotFoundError extends CustomGenericError {
   constructor(message: string) {
-    super(message, 404, 'NotFoundError');
+    super(message, 404);
   }
 }
 
