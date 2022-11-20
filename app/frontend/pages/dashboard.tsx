@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { GrUpdate } from 'react-icons/gr';
 import { MdLogout } from 'react-icons/md';
-import Footer from '../components/Footer';
 import TransactionsList from '../components/TransactionsList';
 import TransferForm from '../components/TransferForm';
 import service from '../service';
@@ -66,25 +65,22 @@ export default function Dashboard() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
-        <span>LOGO</span>
-        <div>
-          <h1>{`Olá @${username}`}</h1>
-          <button type="button" title="Logout" onClick={handleLogout}>
-            <MdLogout />
-          </button>
-        </div>
+      <header className={styles.header}>
+        <h1>{`Olá @${username}`}</h1>
+        <button type="button" title="Sair" onClick={handleLogout}>
+          <MdLogout />
+        </button>
       </header>
 
-      <main>
-        <section>
-          <div>
-            <button type="button" onClick={() => handleUpdateBalance(token)}>
+      <main className={styles.main}>
+        <section className={styles.balance}>
+          <div className={styles.balance__label}>
+            <h2>Saldo disponível:</h2>
+            <button type="button" title="Atualizar" onClick={() => handleUpdateBalance(token)}>
               <GrUpdate />
             </button>
-            <h2>Saldo disponível:</h2>
           </div>
-          <span>{`R$ ${balance}`}</span>
+          <span className={styles.balance__value}>{`R$ ${balance}`}</span>
           {!!errorMessage && <p>{errorMessage}</p>}
         </section>
 
@@ -92,8 +88,6 @@ export default function Dashboard() {
 
         <TransactionsList token={token} username={username} balance={balance} />
       </main>
-
-      <Footer />
     </div>
   );
 }
