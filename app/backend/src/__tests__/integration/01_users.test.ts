@@ -135,7 +135,7 @@ describe('Verifica as rotas /users', () => {
     it('Retorna status CREATED (201) com mensagem indicando que a operação foi bem-sucedida', async () => {
       sinon.stub(User, 'findOne').resolves(null);
       sinon.stub(User, 'create').resolves(mockUser as User);
-      sinon.stub(Account, 'create').resolves(mockAccount as Account);
+      sinon.stub(Account, 'create').resolves(mockAccount as unknown as Account);
 
       const response = await request(app.app)
         .post('/users')
@@ -243,7 +243,9 @@ describe('Verifica as rotas /users', () => {
 
     it('Retorna status OK (200) com objeto contendo o saldo do usuário caso a operação seja bem-sucedida', async () => {
       sinon.stub(User, 'findOne').resolves(mockUser as User);
-      sinon.stub(Account, 'findOne').resolves(mockAccount as Account);
+      sinon
+        .stub(Account, 'findOne')
+        .resolves(mockAccount as unknown as Account);
 
       const {
         body: { token },
@@ -282,7 +284,9 @@ describe('Verifica as rotas /users', () => {
         .resolves(mockUser as User)
         .onSecondCall()
         .resolves(null);
-      sinon.stub(Account, 'findOne').resolves(mockAccount as Account);
+      sinon
+        .stub(Account, 'findOne')
+        .resolves(mockAccount as unknown as Account);
 
       const {
         body: { token },
