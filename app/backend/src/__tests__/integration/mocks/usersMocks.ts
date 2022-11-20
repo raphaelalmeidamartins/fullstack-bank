@@ -160,6 +160,7 @@ export const invalidRegisterResponseBodies = [
     message:
       'A senha precisa ter pelo menos 8 caracteres, um número e uma letra maiúscula.',
   },
+  { message: 'Erro interno do servidor.' },
 ];
 
 export const invalidBalanceResponseBodies = [

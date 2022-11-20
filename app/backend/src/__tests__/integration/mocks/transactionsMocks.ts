@@ -63,4 +63,5 @@ export const invalidRegisterTransactionResponseBodies = [
   {
     message: 'O valor da transação precisa ser um valor numérico positivo',
   },
+  { message: 'Erro interno do servidor.' },
 ];
