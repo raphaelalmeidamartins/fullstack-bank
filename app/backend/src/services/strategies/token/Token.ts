@@ -3,8 +3,6 @@ import UnauthorizedError from '../../../utils/errors/UnauthorizedError';
 import ITokenPayload from './types/ITokenPayload';
 
 class Token {
-  constructor(private tokenModule = jwt) {}
-
   static async generate(payload: ITokenPayload): Promise<string> {
     const token = jwt.sign(payload, String(process.env.JWT_SECRET), {
       expiresIn: '24h',
