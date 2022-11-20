@@ -3,3 +3,4 @@ node_modules.tar.gz
 /node_modules
 .env
 *.http
+.nyc_output/
