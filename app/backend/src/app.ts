@@ -1,7 +1,8 @@
 import express from 'express';
-import loginRouter from './routes/login';
+import swaggerUI from 'swagger-ui-express';
 import transactionsRouter from './routes/transactions';
 import usersRouter from './routes/users';
+import swaggerSettingsBr from './swagger-br.json';
 import errorMiddleware from './utils/middleware/errorMiddleware';
 
 class App {
@@ -29,7 +30,8 @@ class App {
     this.app.use(express.json());
     this.app.use(accessControl);
 
-    this.app.use('/login', loginRouter);
+    this.app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSettingsBr));
+
     this.app.use('/users', usersRouter);
     this.app.use('/transactions', transactionsRouter);
 

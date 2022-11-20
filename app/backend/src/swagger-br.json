@@ -1,0 +1,473 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Bank API",
+    "description": "API para uma aplicação de carteira digital.",
+    "contact": {
+      "email": "raphael.almeida.martins@gmail.com"
+    },
+    "version": "1.0.11"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001"
+    }
+  ],
+  "tags": [
+    {
+      "name": "users",
+      "description": "Operações envolvendo usuários"
+    },
+    {
+      "name": "transactions",
+      "description": "Operações envolvendo transações"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Criar usuário",
+        "description": "Rota utilizada para cadastro de novos usuários.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "xuxameneguel"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "Xuxuxu_xaxaxa_123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Usuário registrado com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Senha não atende critérios de segurança, nome de usuário com padrão inválido ou o corpo da requisição tem campos faltando.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "A senha precisa ter pelo menos 8 caracteres, um número e uma   letra maiúscula."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "O nome de usuário já existe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "O nome de usuário escolhido está indisponível, escolha outro."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Loga usuário na aplicação",
+        "description": "Retorna objeto contendo json web token que deve ser utilizado nas rotas autenticadas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "xuxameneguel"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "Xuxuxu_xaxaxa_123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "xuxameneguel"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ4dXhhbWVuZWd1ZWwiLCJpYXQiOjE2Njg5MjM2NDUsImV4cCI6MTY2OTAxMDA0NX0.iZunlwSFgBIJ6ZHUtkTpt0NMmeaI8IUge3Eusm3_xKI"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "O corpo da requisição contém dados inválidos ou faltando.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Todos os campos precisam ser preenchidos."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Nome de usuário ou senha estão incorretos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "O nome de usuário ou a senha estão incorretos."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/balance": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Acessar saldo",
+        "description": "Retorna saldo disponível na conta do usuário com base no token contido nos headers da requisição",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "balance": {
+                      "type": "number",
+                      "example": 100
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token faltando, inválido ou expirado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Token inválido ou expirado."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "post": {
+        "tags": [
+          "transactions"
+        ],
+        "summary": "Realizar transação",
+        "description": "Rota utilizada para transferir dinheiro para a conta de outro usuário.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "xuxameneguel"
+                  },
+                  "value": {
+                    "type": "number",
+                    "example": 25
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Transação efetuada com sucesso"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados do body da requisição estão inválidos ou faltando.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Todos os campos precisam ser preenchidos."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Dados de transação inválidos, verifique se o nome de usuário está correto."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Saldo indisponível para realizar transação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Você não tem saldo suficiente para realizar esta transação."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "transactions"
+        ],
+        "summary": "Realizar transação",
+        "description": "Rota utilizada para transferir dinheiro para a conta de outro usuário.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filtra transferências efetuadas (cashout) e recebidas (cashin). Quando esse parâmetro não é fornecido, são retornadas transações dos dois tipos.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "cashout",
+                "cashin"
+              ]
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Data no formato MM/DD/YYYY que marca o início do intervalo do filtro por período. Quando não fornecids, são retornadas as transações de todos os períodos.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Data no formato MM/DD/YYYY que marca o fim do intervalo do filtro por período. Quando não fornecida, é considerada a data do dia da pesquisa.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "value": {
+                        "type": "number"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      },
+                      "debitedAccount": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "user": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "username": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "creditedAccount": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "user": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "username": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token inválido ou faltando.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Token inválido ou expirado."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
