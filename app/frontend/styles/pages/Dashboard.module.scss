@@ -5,7 +5,7 @@
 .page {
   @include background2;
 
-min-height: 100vh;
+  min-height: 100vh;
   padding: 3rem 1rem 4rem;
   position: relative;
   width: 100vw;
@@ -71,4 +71,12 @@ min-height: 100vh;
 .balance__value {
   font-size: 1.5rem;
   margin-top: 1rem;
+}
+
+@media screen and (max-width: 719px) {
+  .header {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
 }

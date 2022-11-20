@@ -75,3 +75,21 @@
     filter: brightness(200%);
   }
 }
+
+@media screen and (max-width: 719px) {
+  .form {
+    align-items: stretch;
+    flex-flow: column nowrap;
+  }
+
+  .form__input-container {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  .form__button {
+    width: 100%;
+    margin-top: 1rem;
+    max-width: unset;
+  }
+}

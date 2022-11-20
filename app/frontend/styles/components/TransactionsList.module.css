@@ -87,7 +87,7 @@
   width: 100%;
 }
 .list li {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -121,4 +121,24 @@
 .list__info div {
   font-style: italic;
   margin-top: 0.2rem;
+}
+
+@media screen and (max-width: 719px) {
+  .form,
+.form__date-filters {
+    align-items: stretch;
+    flex-flow: column nowrap;
+  }
+  .form__input-label {
+    width: 100%;
+  }
+  .form__input-container {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .form__button {
+    width: 100%;
+    margin-top: 1rem;
+    max-width: unset;
+  }
 }/*# sourceMappingURL=TransactionsList.module.css.map */
