@@ -9,7 +9,7 @@ const headers = {
 const service = {
   post: {
     async login(username: string, password: string) {
-      const response = await fetch(`${API_URL}/login`, {
+      const response = await fetch(`${API_URL}/users/login`, {
         method: 'POST',
         headers,
         body: JSON.stringify({ username, password }),

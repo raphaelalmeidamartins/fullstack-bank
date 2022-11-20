@@ -4,6 +4,7 @@ import { userController } from './controllerInstances';
 
 const usersRouter = Router();
 
+usersRouter.post('/login', userController.login);
 usersRouter.post('/', userController.register);
 usersRouter.get('/balance', userController.getBalance);
 
