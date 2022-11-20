@@ -6,9 +6,9 @@
   "scripts": {
     "build": "npx -y tsc",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "prestart": "npm run db:reset",
-    "start": "ts-node ./src/server.ts .",
-    "predev": "npm run db:reset",
+    "prestart": "npm run build && npm run db:reset",
+    "start": "node ./build/server.js .",
+    "predev": "npm run build && npm run db:reset",
     "dev": "ts-node-dev --watch \"./src/**\" ./src/server.ts",
     "lint": "eslint ./src --ext .ts"
   },
