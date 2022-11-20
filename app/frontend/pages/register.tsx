@@ -24,8 +24,8 @@ export default function Register() {
 
   const getIconModifier = (name: string): string => {
     const modifier = {
-      focus: styles['.form__icon--focus'],
-      blur: styles['.form__icon--blur'],
+      focus: styles['form__icon--focus'],
+      blur: styles['form__icon--blur'],
     };
 
     return focused === name ? modifier.focus : modifier.blur;
