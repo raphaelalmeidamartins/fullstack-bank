@@ -4,6 +4,8 @@
   "description": "",
   "main": "./build/server",
   "scripts": {
+    "test": "mocha -r ts-node/register ./src/__tests__/**/*$NAME*.{test,spec}.ts -t 10000 --exit",
+    "test:coverage": "nyc npm run test",
     "build": "npx -y tsc",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "prestart": "npm run build && npm run db:reset",
