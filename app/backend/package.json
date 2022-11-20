@@ -6,11 +6,10 @@
   "scripts": {
     "build": "npx -y tsc",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "prestart": "npm run build && npm run db:reset",
+    "prestart": "npm run db:reset",
     "start": "ts-node ./src/server.ts .",
-    "predev": "npm run build && npm run db:reset",
+    "predev": "npm run db:reset",
     "dev": "ts-node-dev --watch \"./src/**\" ./src/server.ts",
-    "postinstall": "if [ ! -z 'cat ./packages.npm' ]; then npm i --ignore-scripts $(cat ./packages.npm); fi",
     "lint": "eslint ./src --ext .ts"
   },
   "keywords": [],
