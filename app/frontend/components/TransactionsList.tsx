@@ -1,12 +1,10 @@
 import { StatusCodes } from 'http-status-codes';
 import {
-  ChangeEvent,
-  FormEvent,
-  useEffect,
-  useState,
+  ChangeEvent, FormEvent, useEffect, useState,
 } from 'react';
 import { BsCash } from 'react-icons/bs';
 import service from '../service';
+import styles from '../styles/components/TransactionsList.module.css';
 import ITransaction from '../types/ITransaction';
 
 export default function TransactionsList({
@@ -68,51 +66,64 @@ export default function TransactionsList({
   };
 
   return (
-    <section>
-      <h2>Histórico</h2>
-      {!!errorMessage && <p>{errorMessage}</p>}
+    <section className={styles.section}>
+      <h2 className={styles.section__title}>Histórico</h2>
+      {!!errorMessage && (
+        <p className={styles['form__error-message']}>{errorMessage}</p>
+      )}
       {!errorMessage && (
         <>
-          <form action="GET" onSubmit={handleUpdateList}>
-            <label htmlFor="type">
-              Tipo:
-              <select
-                name="type"
-                value={type}
-                id="type"
-                onChange={handleChange}
-              >
-                <option value="">Todas</option>
-                <option value="cashout">Enviadas</option>
-                <option value="cashin">Recebidas</option>
-              </select>
+          <form
+            className={styles.form}
+            action="GET"
+            onSubmit={handleUpdateList}
+          >
+            <label className={styles['form__input-label']} htmlFor="type">
+              <span>Tipo:</span>
+              <div className={styles['form__input-container']}>
+                <select
+                  name="type"
+                  value={type}
+                  id="type"
+                  onChange={handleChange}
+                >
+                  <option value="">Todas</option>
+                  <option value="cashout">Enviadas</option>
+                  <option value="cashin">Recebidas</option>
+                </select>
+              </div>
             </label>
-            <section>
-              <h3>Filtrar por período:</h3>
-              <label htmlFor="from">
-                De:
-                <input
-                  type="date"
-                  name="from"
-                  id="from"
-                  value={from}
-                  onChange={handleChange}
-                />
+            <section className={styles['form__date-filters']}>
+              <label className={styles['form__input-label']} htmlFor="from">
+                <span>De:</span>
+                <div className={styles['form__input-container']}>
+                  <input
+                    type="date"
+                    name="from"
+                    id="from"
+                    value={from}
+                    onChange={handleChange}
+                  />
+                </div>
               </label>
-              <label htmlFor="to">
-                a:
-                <input
-                  type="date"
-                  name="to"
-                  id="to"
-                  value={to}
-                  onChange={handleChange}
-                />
+              <label className={styles['form__input-label']} htmlFor="to">
+                <span>até:</span>
+                <div className={styles['form__input-container']}>
+                  <input
+                    type="date"
+                    name="to"
+                    id="to"
+                    value={to}
+                    onChange={handleChange}
+                  />
+                </div>
               </label>
             </section>
-            <button type="submit">APLICAR</button>
+            <button className={styles.form__button} type="submit">
+              APLICAR
+            </button>
           </form>
-          <ul>
+          <ul className={styles.list}>
             {transactions.map(
               ({
                 id,
@@ -126,24 +137,28 @@ export default function TransactionsList({
                 createdAt,
               }) => (
                 <li key={id}>
-                  <span>
-                    <BsCash />
-                  </span>
-                  <div>
-                    <span>
-                      Transação
-                      {' '}
-                      {debitedUSer === username ? 'enviada' : 'recebida'}
+                  <div className={styles.list__item}>
+                    <span className={styles.list__icon}>
+                      <BsCash />
                     </span>
-                    <span>
-                      @
-                      {debitedUSer === username ? creditedUser : debitedUSer}
-                    </span>
-                    <span>
-                      R$
-                      {' '}
-                      {value.toFixed(2).replace('.', ',')}
-                    </span>
+                    <div className={styles.list__info}>
+                      <strong>
+                        Transação
+                        {' '}
+                        {debitedUSer === username ? 'enviada' : 'recebida'}
+                      </strong>
+                      <div>
+                        <p>
+                          @
+                          {debitedUSer === username ? creditedUser : debitedUSer}
+                        </p>
+                        <p>
+                          R$
+                          {' '}
+                          {value.toFixed(2).replace('.', ',')}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                   <span>{new Date(createdAt).toLocaleDateString()}</span>
                 </li>

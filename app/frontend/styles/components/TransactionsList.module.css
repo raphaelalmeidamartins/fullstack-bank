@@ -1,0 +1,124 @@
+.section {
+  background-color: #ffffff;
+  border: 1px solid rgba(119, 129, 135, 0.3960784314);
+  border-radius: 1.8rem;
+  box-shadow: 0 5px 8px rgba(119, 129, 135, 0.3960784314);
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 2rem;
+  padding: 2rem;
+  transition: 200ms;
+  width: 100%;
+}
+
+.section__title {
+  margin-bottom: 1.5rem;
+}
+
+.form {
+  align-items: flex-end;
+  display: flex;
+  justify-content: stretch;
+}
+
+.form__date-filters {
+  align-items: center;
+  display: flex;
+  justify-content: stretch;
+  width: 100%;
+}
+
+.form__input-label {
+  width: 50%;
+}
+
+.form__input-container {
+  display: flex;
+  margin-right: 1rem;
+  margin-top: 0.4rem;
+  position: relative;
+}
+.form__input-container input,
+.form__input-container select {
+  background-color: rgba(208, 208, 208, 0.0549019608);
+  border: 1px solid rgba(119, 129, 135, 0.3960784314);
+  border-radius: 1.2rem;
+  box-shadow: 0 3px 3px rgba(119, 129, 135, 0.3960784314);
+  color: black;
+  flex-grow: 2;
+  font-size: 1rem;
+  padding: 0.7rem;
+  width: 100%;
+}
+.form__input-container input:focus,
+.form__input-container select:focus {
+  opacity: 1;
+}
+
+.form__error-message {
+  color: rgb(159, 88, 0);
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.form__button {
+  background-color: #27292b;
+  border-radius: 1.2rem;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  max-width: 180px;
+  padding: 0.7rem;
+  text-align: center;
+  text-decoration: none;
+  transition: filter 400ms ease-in-out;
+  width: 50%;
+}
+.form__button:disabled {
+  opacity: 0.5;
+}
+.form__button:hover {
+  filter: brightness(200%);
+}
+
+.list {
+  list-style-type: none;
+  margin-top: 2.5rem;
+  width: 100%;
+}
+.list li {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.list li:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.list__item {
+  display: flex;
+}
+
+.list__icon {
+  align-items: center;
+  background-color: #27292b;
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
+  font-size: 2rem;
+  height: 50px;
+  justify-content: center;
+  margin-right: 2rem;
+  position: relative;
+  width: 50px;
+}
+
+.list__info {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.list__info div {
+  font-style: italic;
+  margin-top: 0.2rem;
+}/*# sourceMappingURL=TransactionsList.module.css.map */
