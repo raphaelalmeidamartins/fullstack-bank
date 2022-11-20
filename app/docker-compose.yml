@@ -1,0 +1,55 @@
+version: '3.9'
+
+services:
+  frontend:
+    container_name: ng_frontend
+    build: ./frontend
+    ports:
+      - 3000:3000
+    platform: linux/x86_64
+    working_dir: /app-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]
+      timeout: 10s
+      retries: 5
+
+  backend:
+    container_name: ng_backend
+    build: ./backend
+    ports:
+      - 3001:3001
+    platform: linux/x86_64
+    working_dir: /app-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - APP_PORT=3001
+      - JWT_SECRET=jwt_secret
+      - DB_USER=postgres
+      - DB_PASS=123456
+      - DB_HOST=db
+      - DB_PORT=5432
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
+  db:
+    container_name: ng_db
+    image: postgres:15.1
+    platform: linux/x86_64
+    ports:
+      - 3002:5432
+    user: postgres
+    environment:
+      - POSTGRES_PASSWORD=123456
+    restart: 'always'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      timeout: 10s
+      retries: 5
