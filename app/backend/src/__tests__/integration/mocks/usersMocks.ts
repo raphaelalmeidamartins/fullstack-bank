@@ -7,6 +7,11 @@ export const validLoginRequestBody = {
   password: 'Bank_secret_123',
 };
 
+export const validLoginRequestBody2 = {
+  username: 'angelica',
+  password: 'Bank_secret_123',
+};
+
 export const validRegisterRequestBody = validLoginRequestBody;
 
 export const invalidLoginRequestBodies = [
@@ -85,16 +90,34 @@ export const invalidRegisterRequestBodies = [
   },
 ];
 
+export const mockAccount = {
+  id: 1,
+  balance: 100.0,
+  async update(updateObj: { balance: number }) {
+    this.balance = updateObj.balance;
+  },
+};
+
 export const mockUser = {
   id: 1,
   username: validLoginRequestBody.username,
   password: bcrypt.hashSync(validLoginRequestBody.password, 10),
-  accountId: 1,
+  accountId: mockAccount.id,
 };
 
-export const mockAccount = {
-  id: 1,
+export const mockAccount2 = {
+  id: 2,
   balance: 100.0,
+  async update(updateObj: { balance: number }) {
+    this.balance = updateObj.balance;
+  },
+};
+
+export const mockUser2 = {
+  id: 2,
+  username: validLoginRequestBody2.username,
+  password: bcrypt.hashSync(validLoginRequestBody2.password, 10),
+  accountId: mockAccount2.id,
 };
 
 export const validBalanceResponseBody = {
