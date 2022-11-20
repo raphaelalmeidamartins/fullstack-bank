@@ -57,6 +57,8 @@ describe('Verifica as rotas /users', () => {
     });
 
     it('Retorna status UNAUTHORIZED (401) com mensagem de erro caso a senha esteja incorreta', async () => {
+      sinon.stub(User, 'findOne').resolves(mockUser as User);
+
       const response = await request(app.app)
         .post('/users/login')
         .send(invalidLoginRequestBodies[1]);
