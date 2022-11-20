@@ -1,0 +1,69 @@
+.section {
+  background-color: #ffffff;
+  border: 1px solid rgba(119, 129, 135, 0.3960784314);
+  border-radius: 1.8rem;
+  box-shadow: 0 5px 8px rgba(119, 129, 135, 0.3960784314);
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 2rem;
+  padding: 2rem;
+  transition: 200ms;
+  width: 100%;
+}
+
+.section__title {
+  margin-bottom: 1.5rem;
+}
+
+.form {
+  align-items: center;
+  display: flex;
+  justify-content: stretch;
+}
+
+.form__input-container {
+  display: flex;
+  margin-right: 1rem;
+  position: relative;
+  width: 100%;
+}
+.form__input-container input {
+  background-color: rgba(208, 208, 208, 0.0549019608);
+  border: 1px solid rgba(119, 129, 135, 0.3960784314);
+  border-radius: 1.2rem;
+  box-shadow: 0 3px 3px rgba(119, 129, 135, 0.3960784314);
+  color: black;
+  flex-grow: 2;
+  font-size: 1rem;
+  padding: 0.7rem;
+  width: 100%;
+}
+.form__input-container input:focus {
+  opacity: 1;
+}
+
+.form__error-message {
+  color: rgb(159, 88, 0);
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.form__button {
+  background-color: #27292b;
+  border-radius: 1.2rem;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  max-width: 180px;
+  padding: 0.7rem;
+  text-align: center;
+  text-decoration: none;
+  transition: filter 400ms ease-in-out;
+  width: 50%;
+}
+.form__button:disabled {
+  opacity: 0.5;
+}
+.form__button:hover {
+  filter: brightness(200%);
+}/*# sourceMappingURL=TransferForm.module.css.map */

@@ -1,6 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import service from '../service';
+import styles from '../styles/components/TransferForm.module.css';
 import Modal from './Modal';
 
 export default function TransferForm({
@@ -11,7 +12,7 @@ export default function TransferForm({
   updateBalance: Function;
 }) {
   const [username, setUsername] = useState('');
-  const [value, setValue] = useState('0');
+  const [value, setValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [displayModal, setDisplayModal] = useState(false);
 
@@ -44,7 +45,7 @@ export default function TransferForm({
     switch (response.status) {
       case StatusCodes.CREATED:
         setUsername('');
-        setValue('0');
+        setValue('');
         setErrorMessage('');
         updateBalance(token);
         setDisplayModal(true);
@@ -57,25 +58,34 @@ export default function TransferForm({
   };
 
   return (
-    <section>
-      <form action="POST" onSubmit={handleSubmit}>
-        <h2>Transferir</h2>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleChange}
-          placeholder="Usuário"
-        />
-        <input
-          type="text"
-          name="value"
-          value={value}
-          onChange={handleChange}
-          placeholder="Valor"
-        />
-        <button type="submit">ENVIAR</button>
+    <section className={styles.section}>
+      <h2 className={styles.section__title}>Transferir</h2>
+      <form className={styles.form} action="POST" onSubmit={handleSubmit}>
+        <div className={styles['form__input-container']}>
+          <input
+            type="text"
+            name="username"
+            value={username}
+            onChange={handleChange}
+            placeholder="Usuário"
+          />
+        </div>
+        <div className={styles['form__input-container']}>
+          <input
+            type="text"
+            name="value"
+            value={value}
+            onChange={handleChange}
+            placeholder="Valor"
+          />
+        </div>
+        <button className={styles.form__button} type="submit">
+          ENVIAR
+        </button>
       </form>
+      {!!errorMessage && (
+        <p className={styles['form__error-message']}>{errorMessage}</p>
+      )}
 
       <Modal
         display={displayModal}
@@ -83,7 +93,6 @@ export default function TransferForm({
         buttonMessage="OK"
         handleClick={() => setDisplayModal(false)}
       />
-      {!!errorMessage && <p>{errorMessage}</p>}
     </section>
   );
 }
