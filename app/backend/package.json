@@ -46,7 +46,7 @@
     "http-status-codes": "^2.2.0",
     "joi": "^17.6.0",
     "jsonwebtoken": "8.5.1",
-    "mysql2": "2.3.3",
+    "pg": "^8.8.0",
     "sequelize": "6.9.0",
     "zod": "^3.19.1"
   }
