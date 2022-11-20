@@ -6,23 +6,25 @@ import jwt = require('jsonwebtoken');
 import chaiHttp from 'chai-http';
 
 import { StatusCodes } from 'http-status-codes';
+import { Transaction as SequelizeTransaction } from 'sequelize/types';
 import App from '../../app';
+import db from '../../database/models';
 import Account from '../../database/models/Account';
 import User from '../../database/models/User';
 import {
-  invalidBalanceResponseBodies,
-  invalidLoginRequestBodies,
-  invalidLoginResponseBodies,
-  invalidRegisterRequestBodies,
-  invalidRegisterResponseBodies,
-  mockAccount,
-  mockToken,
-  mockUser,
-  validBalanceResponseBody,
-  validLoginRequestBody,
-  validLoginResponseBody,
-  validRegisterRequestBody,
-  validRegisterResponseBody
+    invalidBalanceResponseBodies,
+    invalidLoginRequestBodies,
+    invalidLoginResponseBodies,
+    invalidRegisterRequestBodies,
+    invalidRegisterResponseBodies,
+    mockAccount,
+    mockToken,
+    mockUser,
+    validBalanceResponseBody,
+    validLoginRequestBody,
+    validLoginResponseBody,
+    validRegisterRequestBody,
+    validRegisterResponseBody
 } from './mocks/usersMocks';
 
 const app = new App();
@@ -145,6 +147,25 @@ describe('Verifica as rotas /users', () => {
 
       expect(response.status).to.be.eq(StatusCodes.CREATED);
       expect(response.body).to.be.deep.eq(validRegisterResponseBody);
+    });
+
+    it('Retorna status INTERNAL SERVER ERROR (500) com mensagem de erro caso haja alguma falha durante a atualização do banco de dados. As aoperações devem ser canceladas.', async () => {
+      sinon.stub(User, 'findOne').resolves(null);
+      sinon.stub(User, 'create').resolves(mockUser as User);
+      sinon.stub(Account, 'create').rejects();
+      const sequelizeTransactionStub = sinon.stub(db, 'transaction').resolves({
+        async commit() {},
+        async rollback() {},
+        async afterCommit() {},
+      } as unknown as SequelizeTransaction);
+
+      const response = await request(app.app)
+        .post('/users')
+        .send(validRegisterRequestBody);
+
+      expect(sequelizeTransactionStub.calledOnce).to.be.true;
+      expect(response.status).to.be.eq(StatusCodes.INTERNAL_SERVER_ERROR);
+    expect(response.body).to.be.deep.eq(invalidRegisterResponseBodies[4]);
     });
 
     it('Retorna status UNPROCESSABLE ENTITY (422) com mensagem de erro caso o nome de usuário não esteja disponível', async () => {
