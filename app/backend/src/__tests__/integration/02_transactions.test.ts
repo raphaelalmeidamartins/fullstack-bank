@@ -13,24 +13,24 @@ import Account from '../../database/models/Account';
 import Transaction from '../../database/models/Transactions';
 import User from '../../database/models/User';
 import {
-  invalidRegisterTransactionRequestBodies,
-  invalidRegisterTransactionResponseBodies,
-  validRegisterTransactionRequestBody,
-  validRegisterTransactionResponseBody
+    invalidRegisterTransactionRequestBodies,
+    invalidRegisterTransactionResponseBodies,
+    validRegisterTransactionRequestBody,
+    validRegisterTransactionResponseBody
 } from './mocks/transactionsMocks';
 import {
-  mockAccount,
-  mockAccount2,
-  mockUser,
-  mockUser2,
-  validLoginRequestBody
+    mockAccount,
+    mockAccount2,
+    mockUser,
+    mockUser2,
+    validLoginRequestBody
 } from './mocks/usersMocks';
 
 const app = new App();
 
 use(chaiHttp);
 
-describe.only('Verifica as rotas /transactions', () => {
+describe('Verifica as rotas /transactions', () => {
   describe('POST /transactions', () => {
     afterEach(() => sinon.restore());
 
@@ -54,7 +54,6 @@ describe.only('Verifica as rotas /transactions', () => {
         async afterCommit() {},
       } as unknown as SequelizeTransaction);
       sinon.stub(Transaction, 'create').resolves();
-      sinon.stub(Account, 'update').resolves();
 
       const {
         body: { token },
@@ -69,6 +68,50 @@ describe.only('Verifica as rotas /transactions', () => {
 
       expect(response.status).to.be.eq(StatusCodes.CREATED);
       expect(response.body).to.be.deep.eq(validRegisterTransactionResponseBody);
+    });
+
+    it('Retorna status INTERNAL SERVER ERRO (500) caso haja erro durante atualização do banco de dados. As atualizações devem ser canceladas', async () => {
+      sinon
+        .stub(User, 'findOne')
+        .onFirstCall()
+        .resolves(mockUser as User)
+        .onSecondCall()
+        .resolves(mockUser2 as User);
+      sinon.stub(User, 'findByPk').resolves(mockUser as User);
+      sinon
+        .stub(Account, 'findByPk')
+        .onFirstCall()
+        .resolves(mockAccount as unknown as Account)
+        .onSecondCall()
+        .resolves({
+          ...mockAccount2,
+          async update() {
+            throw new Error();
+          },
+        } as unknown as Account);
+      const sequelizeTransactionStub = sinon.stub(db, 'transaction').resolves({
+        async commit() {},
+        async rollback() {},
+        async afterCommit() {},
+      } as unknown as SequelizeTransaction);
+      sinon.stub(Transaction, 'create').resolves();
+
+      const {
+        body: { token },
+      } = await request(app.app)
+        .post('/users/login')
+        .send(validLoginRequestBody);
+
+      const response = await request(app.app)
+        .post('/transactions')
+        .set('authorization', token)
+        .send(validRegisterTransactionRequestBody);
+
+      expect(sequelizeTransactionStub.calledOnce).to.be.true;
+      expect(response.status).to.be.eq(StatusCodes.INTERNAL_SERVER_ERROR);
+      expect(response.body).to.be.deep.eq(
+        invalidRegisterTransactionResponseBodies[5]
+      );
     });
 
     it('Retorna status UNPROCESSABLE ENTITY (422) com uma mensagem de erro caso o usuário não tenha saldo suficiente para realizar a transação', async () => {
