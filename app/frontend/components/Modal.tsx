@@ -12,7 +12,10 @@ export default function Modal({
   handleClick: Function;
 }) {
   return (
-    <div>
+    <div className={`${styles.container} ${
+      display ? styles['modal--display'] : styles['modal--hidden']
+    }`}
+    >
       <div
         className={`${styles.modal__overlay} ${
           display ? styles['modal--display'] : styles['modal--hidden']

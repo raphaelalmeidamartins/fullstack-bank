@@ -2,14 +2,21 @@
 @import "../abstracts/_backgrounds";
 @import "../abstracts/_radius";
 
-.modal__overlay {
-  background-color: $dark-secondary-color;
+.container {
   height: 100vh;
   left: 0;
-  opacity: 0.8;
   position: fixed;
   width: 100vw;
   top: 0;
+  z-index: 9;
+}
+
+.modal__overlay {
+  background-color: $dark-secondary-color;
+  height: 100%;
+  opacity: 0.8;
+  width: 100%;
+  z-index: 10;
 }
 
 .modal {
@@ -27,6 +34,7 @@
   top: 50%;
   transition: 200ms;
   transform: translate(-50%, -50%);
+  z-index: 11;
 }
 
 .modal--hidden {
