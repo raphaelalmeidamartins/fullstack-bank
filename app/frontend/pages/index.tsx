@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { FaLock, FaUserAlt } from 'react-icons/fa';
-import logo from '../assets/logo-ngcash-branco.88c5860.svg';
+import logo from '../assets/logo-ngcash-branco.88c5860.png';
 import Footer from '../components/Footer';
 import service from '../service';
 import styles from '../styles/pages/Home.module.css';

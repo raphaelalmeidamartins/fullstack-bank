@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import Modal from '../components/Modal';
 import service from '../service';
 import styles from '../styles/pages/Register.module.css';
-import logo from '../assets/logo-ngcash-branco.88c5860.svg';
+import logo from '../assets/logo-ngcash-branco.88c5860.png';
 
 export default function Register() {
   const router = useRouter();
