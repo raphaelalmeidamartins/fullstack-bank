@@ -6,11 +6,9 @@ module.exports = {
       'Accounts',
       [
         {
-          id: 1,
           balance: 100.0,
         },
         {
-          id: 2,
           balance: 100.0,
         },
       ],
