@@ -4,10 +4,14 @@
   "description": "Full stack fine tech app with Next.js and Express.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:e2e": "cypress run --browser electron --e2e",
+    "test:e2e:open": "cypress open --browser electron --e2e",
+    "test:integration": "cd app/backend && npm i && npm run test:coverage",
+    "test": "npm run test:e2e && npm run test:integration",
     "compose:up": "cd app && docker-compose up -d",
     "compose:up:build": "cd app && docker-compose up -d --build",
-    "compose:down": "cd app && docker-compose down --remove-orphans"
+    "compose:down": "cd app && docker-compose down --remove-orphans",
+    "postinstall": "cd app/backend && npm i && cd ../frontend && npm i"
   },
   "author": "Raphael Martins",
   "license": "ISC",
