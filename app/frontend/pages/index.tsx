@@ -1,14 +1,13 @@
 import { StatusCodes } from 'http-status-codes';
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { FaLock, FaUserAlt } from 'react-icons/fa';
+import logo from '../assets/logo-ngcash-branco.88c5860.svg';
 import Footer from '../components/Footer';
 import service from '../service';
 import styles from '../styles/pages/Home.module.css';
-import logo from '../assets/logo-ngcash-branco.88c5860.svg';
 
 export default function Home() {
   const [username, setUsername] = useState('');
@@ -73,7 +72,10 @@ export default function Home() {
     <div className={styles.page}>
       <Head>
         <title>NG.CASH - Login</title>
-        <meta name="description" content="Projeto fullstack de carteira digital" />
+        <meta
+          name="description"
+          content="Projeto fullstack de carteira digital"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -125,9 +127,13 @@ export default function Home() {
           >
             ENVIAR
           </button>
-          <Link className={styles.form__button} href="/register">
+          <button
+            type="button"
+            className={styles.form__button}
+            onClick={() => router.push('/register')}
+          >
             CRIAR CONTA
-          </Link>
+          </button>
         </form>
       </main>
 
