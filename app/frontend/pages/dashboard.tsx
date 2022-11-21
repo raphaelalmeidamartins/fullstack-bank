@@ -23,22 +23,24 @@ export default function Dashboard() {
   };
 
   const handleUpdateBalance = async (authorization: string) => {
-    const response = await service.get.balance(authorization);
-    const data = await response.json();
+    if (token) {
+      const response = await service.get.balance(authorization);
+      const data = await response.json();
 
-    switch (response.status) {
-      case StatusCodes.OK:
-        setErrorMessage('');
-        setBalance(data.balance.toFixed(2).replace('.', ','));
-        break;
+      switch (response.status) {
+        case StatusCodes.OK:
+          setErrorMessage('');
+          setBalance(data.balance.toFixed(2).replace('.', ','));
+          break;
 
-      case StatusCodes.UNAUTHORIZED:
-        handleLogout();
-        break;
+        case StatusCodes.UNAUTHORIZED:
+          handleLogout();
+          break;
 
-      default:
-        setErrorMessage(data.message);
-        break;
+        default:
+          setErrorMessage(data.message);
+          break;
+      }
     }
   };
 
@@ -53,9 +55,11 @@ export default function Dashboard() {
 
     setToken(parsedData.token);
     setUserName(parsedData.username);
-
-    handleUpdateBalance(parsedData.token);
   }, []);
+
+  useEffect(() => {
+    handleUpdateBalance(token);
+  }, [token]);
 
   return (
     <div className={styles.page}>

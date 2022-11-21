@@ -28,22 +28,24 @@ export default function TransactionsList({
       event.preventDefault();
     }
 
-    const response = await service.get.transactions(token, type, from, to);
-    const data = await response.json();
+    if (token) {
+      const response = await service.get.transactions(token, type, from, to);
+      const data = await response.json();
 
-    switch (response.status) {
-      case StatusCodes.OK:
-        setErrorMessage('');
-        setTransactions(data);
-        break;
+      switch (response.status) {
+        case StatusCodes.OK:
+          setErrorMessage('');
+          setTransactions(data);
+          break;
 
-      case StatusCodes.UNAUTHORIZED:
-        setErrorMessage('Seu login expirou');
-        break;
+        case StatusCodes.UNAUTHORIZED:
+          setErrorMessage('Seu login expirou');
+          break;
 
-      default:
-        setErrorMessage(data.message);
-        break;
+        default:
+          setErrorMessage(data.message);
+          break;
+      }
     }
   };
 
