@@ -6,6 +6,7 @@
   background-size: cover;
   align-items: center;
   display: flex;
+  flex-flow: column nowrap;
   height: 100vh;
   justify-content: center;
   width: 100vw;
@@ -28,6 +29,7 @@
   box-shadow: 0 5px 8px rgba(119, 129, 135, 0.3960784314);
   display: flex;
   flex-flow: column nowrap;
+  flex-basis: 372px;
   max-width: 372px;
   padding: 2rem;
   transition: 200ms;
@@ -111,11 +113,6 @@
     background-color: transparent;
     border: 0;
     box-shadow: none;
-  }
-}
-@media screen and (max-height: 550px) {
-  .page {
-    flex-flow: column nowrap;
   }
 }
 @media screen and (max-width: 340px) {

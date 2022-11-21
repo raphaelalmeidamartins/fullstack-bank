@@ -7,6 +7,7 @@
 
   align-items: center;
   display: flex;
+  flex-flow: column nowrap;
   height: 100vh;
   justify-content: center;
   position: relative;
@@ -30,6 +31,7 @@
   box-shadow: 0 5px 8px $divider-color;
   display: flex;
   flex-flow: column nowrap;
+  flex-basis: 372px;
   max-width: 372px;
   padding: 2rem;
   transition: 200ms;
@@ -120,12 +122,6 @@
     background-color: transparent;
     border: 0;
     box-shadow: none;
-  }
-}
-
-@media screen and (max-height: 550px) {
-  .page {
-    flex-flow: column nowrap;
   }
 }
 
