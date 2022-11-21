@@ -2,6 +2,7 @@ import '@testing-library/cypress/add-commands';
 
 describe('Tela de login', () => {
   beforeEach(() => {
+    cy.clearLocalStorage();
     cy.visit(Cypress.config('baseUrl'));
   });
 
@@ -11,7 +12,7 @@ describe('Tela de login', () => {
     cy.findByPlaceholderText('Nome de usuário').should('exist');
     cy.findByPlaceholderText('Senha').should('exist');
     cy.findByRole('button', { name: /enviar/i }).should('exist');
-    cy.findByRole('link', { name: /criar conta/i }).should('exist');
+    cy.findByRole('button', { name: /criar conta/i }).should('exist');
     cy.findByText(
       /full stack project desenvolvido por com next\.js e node\.js/i
     ).should('exist');
@@ -37,7 +38,7 @@ describe('Tela de login', () => {
   });
 
   it('Verifica se o botão de criar conta redireciona para a tela de cadastro', () => {
-    cy.findByRole('link', { name: /criar conta/i }).click();
+    cy.findByRole('button', { name: /criar conta/i }).click();
     cy.url().should('be.equal', `${Cypress.config('baseUrl')}/register`);
   });
 });
