@@ -12,6 +12,13 @@ module.exports = {
             '$2a$10$fSZZa/tIodeeOJ.JGn6IbuP9QZ44gaN0b1.XCAis/VgNDM.XXlTmC',
           accountId: 1,
         },
+        {
+          id: 2,
+          username: 'daniloputinato',
+          password:
+            '$2a$10$fSZZa/tIodeeOJ.JGn6IbuP9QZ44gaN0b1.XCAis/VgNDM.XXlTmC',
+          accountId: 2,
+        },
       ],
       {}
     );
