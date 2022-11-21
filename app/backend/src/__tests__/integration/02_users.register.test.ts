@@ -31,6 +31,11 @@ describe('POST /users', () => {
     sinon.stub(User, 'findOne').resolves(null);
     sinon.stub(User, 'create').resolves(mockUser as User);
     sinon.stub(Account, 'create').resolves(mockAccount as unknown as Account);
+    sinon.stub(db, 'transaction').resolves({
+      async commit() {},
+      async rollback() {},
+      async afterCommit() {},
+    } as unknown as SequelizeTransaction);
 
     const response = await request(app.app)
       .post('/users')
