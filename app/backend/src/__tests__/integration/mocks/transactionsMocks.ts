@@ -65,3 +65,105 @@ export const invalidRegisterTransactionResponseBodies = [
   },
   { message: 'Erro interno do servidor.' },
 ];
+
+export const transactionListMock = [
+  {
+    id: 5,
+    value: 2,
+    createdAt: '2022-11-21T00:07:23.326Z',
+    debitedAccount: {
+      id: 1,
+      user: {
+        id: 1,
+        username: 'raphaelmartins',
+      },
+    },
+    creditedAccount: {
+      id: 4,
+      user: {
+        id: 4,
+        username: 'daniloputinato',
+      },
+    },
+  },
+  {
+    id: 4,
+    value: 5,
+    createdAt: '2022-11-19T00:07:11.180Z',
+    debitedAccount: {
+      id: 1,
+      user: {
+        id: 1,
+        username: 'raphaelmartins',
+      },
+    },
+    creditedAccount: {
+      id: 2,
+      user: {
+        id: 2,
+        username: 'xuxameneguel',
+      },
+    },
+  },
+  {
+    id: 3,
+    value: 20,
+    createdAt: '2022-10-30T00:06:30.547Z',
+    debitedAccount: {
+      id: 2,
+      user: {
+        id: 2,
+        username: 'xuxameneguel',
+      },
+    },
+    creditedAccount: {
+      id: 1,
+      user: {
+        id: 1,
+        username: 'raphaelmartins',
+      },
+    },
+  },
+  {
+    id: 2,
+    value: 10,
+    createdAt: '2022-09-21T00:06:15.678Z',
+    debitedAccount: {
+      id: 4,
+      user: {
+        id: 4,
+        username: 'daniloputinato',
+      },
+    },
+    creditedAccount: {
+      id: 1,
+      user: {
+        id: 1,
+        username: 'raphaelmartins',
+      },
+    },
+  },
+  {
+    id: 1,
+    value: 10,
+    createdAt: '2022-08-12T00:05:53.476Z',
+    debitedAccount: {
+      id: 3,
+      user: {
+        id: 3,
+        username: 'katyperry',
+      },
+    },
+    creditedAccount: {
+      id: 1,
+      user: {
+        id: 1,
+        username: 'raphaelmartins',
+      },
+    },
+  },
+];
+
+export const invalidTransactionsListResponseBody = {
+  message: 'Token não encontrado.',
+};
