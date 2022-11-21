@@ -62,7 +62,7 @@ npm install
 npm run compose:up
 ```
 
-Executando o comando acima, será criada uma rede de três containerS:
+Executando o comando acima, será criada uma rede de três containers:
 
 * ng_frontend - mapeado na porta 3000
 * ng_backend - mapeado na porta 3001
@@ -72,7 +72,7 @@ Se tratam da aplicação frontend, backend e o banco de dados, respectivamente. 
 
 ## :books: Documentação da API
 
-Com a aplicação em execução, basta acessar o endereço <http://localhost:3001/docs> no seu navegador para visualizar a documentação que foi implementada com o Swagger UI.
+Com a aplicação em execução, basta acessar o endereço <http://localhost:3001/docs> no seu navegador para visualizar a documentação implementada com o Swagger UI.
 
 ![API documentação](./screenshots/api-docs.png)
 
@@ -80,13 +80,13 @@ Com a aplicação em execução, basta acessar o endereço <http://localhost:300
 
 ### Integração
 
-Eu implementei testes de integração no backend com 100% de cobertura. Para verificar o resultado deles, basta executar o comando baixo na raiz do projeto:
+Implementei testes de integração no backend com 100% de cobertura. Para verificar o resultado deles, basta executar o comando baixo na raiz do projeto:
 
 ```sh
 npm run test:integration
 ```
 
-*Observação:* para rodar os testes de integração, não é necessário que a aplicação esteja rodando, pois a interação com o banco de dados é mockada e os testes iniciam uma instância da api antes de serem iniciados.
+*Observação:* para rodar os testes de integração, não é necessário que a aplicação esteja rodando, pois a interação com o banco de dados é mockada e os testes iniciam uma instância da API antes de serem iniciados.
 
 ![Cobertura dos testes de integração](./screenshots/integration-coverage.png)
 
