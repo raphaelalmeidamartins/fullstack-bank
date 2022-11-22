@@ -1,4 +1,4 @@
-# :coin: Full Stack Bank :dollar
+# :coin: Full Stack Bank :dollar:
 
 ![Preview](./screenshots/login.png)
 
@@ -80,7 +80,7 @@ Com a aplicação em execução, basta acessar o endereço <http://localhost:300
 
 ### Integração
 
-Implementei testes de integração no backend com 100% de cobertura. Para verificar o resultado deles, basta executar o comando baixo na raiz do projeto:
+Implementei testes de integração no backend com 100% de cobertura. Para verificar o resultado deles, basta executar o comando abaixo na raiz do projeto:
 
 ```sh
 npm run test:integration
