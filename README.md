@@ -196,7 +196,7 @@ I've implemented backend integration tests with 100% coverage. To check their re
 
 ```sh
 npm run test: integration
-🇧🇷
+```
 
 **Note:** to run the integration tests, it is not necessary for the application to be running, as the interaction with the database is mocked and the tests start an instance of the API before being started.
 <br />
