@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { FaLock, FaUserAlt } from 'react-icons/fa';
-import logo from '../assets/logo-ngcash-branco.88c5860.png';
+import logo from '../assets/logo-dwcash.png';
 import Footer from '../components/Footer';
 import service from '../service';
 import styles from '../styles/pages/Home.module.css';
@@ -71,7 +71,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <Head>
-        <title>NG.CASH - Login</title>
+        <title>DW.CASH - Login</title>
         <meta
           name="description"
           content="Projeto fullstack de carteira digital"

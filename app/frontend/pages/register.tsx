@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import Modal from '../components/Modal';
 import service from '../service';
 import styles from '../styles/pages/Register.module.css';
-import logo from '../assets/logo-ngcash-branco.88c5860.png';
+import logo from '../assets/logo-dwcash.png';
 
 export default function Register() {
   const router = useRouter();
@@ -76,7 +76,7 @@ export default function Register() {
   return (
     <div className={styles.page}>
       <Head>
-        <title>NG.CASH - Cadastro</title>
+        <title>DW.CASH - Cadastro</title>
         <meta name="description" content="Projeto fullstack de carteira digital" />
         <link rel="icon" href="/favicon.png" />
       </Head>

@@ -64,7 +64,7 @@ export default function Dashboard() {
   return (
     <div className={styles.page}>
       <Head>
-        <title>NG.CASH - Início</title>
+        <title>DW.CASH - Início</title>
         <meta name="description" content="Projeto fullstack de carteira digital" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
